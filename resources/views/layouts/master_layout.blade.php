@@ -1,7 +1,6 @@
     <!doctype html>
     <html lang="en" dir="ltr">
     <head>
-
         <!-- META DATA -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,7 +39,12 @@
 
         <!-- COLOR SKIN CSS -->
         <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
-
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/datatable/datatables.css') }}">
+        <style>
+            table{
+                width: 100% !important;
+            }
+        </style>
     </head>
 
     <body class="dark-mode app sidebar-mini">
@@ -456,6 +460,8 @@
 
 <!-- CUSTOM JS -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+        <script src="{{ asset('assets/datatable/datatables.js') }}"></script>
+        @stack('scripts')
         @include('sweetalert::alert')
 </body>
 </html>
