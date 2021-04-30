@@ -17,7 +17,9 @@ class CreateMatchesTable extends Migration
             $table->id();
             $table->integer('league_id');
             $table->string('home_team');
+            $table->integer('home_scores')->nullable();
             $table->string('away_team');
+            $table->string('away_scores')->nullable();
             $table->date('match_day');
             $table->time('match_time');
             $table->timestamps();

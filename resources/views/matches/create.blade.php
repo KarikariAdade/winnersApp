@@ -1,109 +1,83 @@
 @extends('layouts.master_layout')
 @section('content')
-    <div class="side-app">
-
-        <!-- PAGE-HEADER -->
-        <div class="page-header">
-            <div>
-                <h1 class="page-title">Matches</h1>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Match</li>
-                </ol>
+<div class="container">
+    <div class="card p-4">
+        <form class="row" method="POST" action="{{ route('match.store') }}">
+            @csrf
+            <div class="form-group col-md-4">
+                <label>Select Sports Type</label>
+                <select class="form-control select2 @error('sports_type') is-invalid @enderror" data-placeholder="Choose one" name="sports_type">
+                    <option></option>
+                    @foreach($sports_types as $sports_type)
+                        <option value="{{ $sports_type->name }}" {{ old('sports_type') === $sports_type->name ? 'selected' : null }}>{{ $sports_type->name }}</option>
+                    @endforeach
+                </select>
+                @error('sports_type')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
-            <div class="d-flex  ml-auto header-right-icons header-search-icon">
-                <div class="dropdown d-sm-flex">
-                    <a href="#" class="nav-link icon" data-toggle="dropdown">
-                        <i class="fe fe-search"></i>
-                    </a>
-                    <div class="dropdown-menu header-search dropdown-menu-left">
-                        <div class="input-group w-100 p-2">
-                            <input type="text" class="form-control " placeholder="Search....">
-                            <div class="input-group-append ">
-                                <button type="button" class="btn btn-primary ">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- SEARCH -->
-                <div class="dropdown d-md-flex">
-                    <a class="nav-link icon full-screen-link nav-link-bg">
-                        <i class="fe fe-maximize fullscreen-button"></i>
-                    </a>
-                </div><!-- FULL-SCREEN -->
-                <div class="dropdown d-md-flex notifications">
-                    <a class="nav-link icon" data-toggle="dropdown">
-                        <i class="fe fe-bell"></i>
-                        <span class="nav-unread badge badge-success badge-pill">2</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <div class="notifications-menu">
-                            <a class="dropdown-item d-flex pb-3" href="#">
-                                <div class="fs-16 text-danger mr-3">
-                                    <i class="fa fa-cogs"></i>
-                                </div>
-                                <div class="">
-                                    <strong>Server Rebooted</strong>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item text-center">View all Notification</a>
-                    </div>
-                </div><!-- NOTIFICATIONS -->
-                <div class="dropdown d-md-flex message">
-                    <a class="nav-link icon text-center" data-toggle="dropdown">
-                        <i class="fe fe-mail"></i>
-                        <span class="nav-unread badge badge-danger badge-pill">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <div class="message-menu">
-                            <a class="dropdown-item d-flex pb-3" href="#">
-                                <span class="avatar avatar-md brround mr-3 align-self-center cover-image" data-image-src="../../assets/images/users/15.jpg"></span>
-                                <div>
-                                    <strong>Sanderson</strong> New Schedule Realease......
-                                    <div class="small text-muted">
-                                        2 days ago
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item text-center">See all Messages</a>
-                    </div>
-                </div><!-- MESSAGE-BOX -->
-                <div class="dropdown profile-1">
-                    <a href="#" data-toggle="dropdown" class="nav-link pr-2 leading-none d-flex">
-                          <span>
-                             <img src="../../assets/images/users/10.jpg" alt="profile-user" class="avatar  profile-user brround cover-image">
-                         </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <div class="drop-heading">
-                            <div class="text-center">
-                                <h5 class="text-dark mb-0">{{ auth()->user()->name }}</h5>
-                                <small class="text-muted">Administrator</small>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                            <i class="dropdown-icon mdi  mdi-logout-variant"></i> Sign out
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
+            <div class="form-group col-md-4">
+                <label>Select League</label>
+                <select class="form-control select2 @error('league') is-invalid @enderror" data-placeholder="Choose one" name="league">
+                    <option></option>
+                    @foreach($leagues as $league)
+                    <option value="{{ $league->id }}" {{ old('league') == $league->id ? 'selected' : null }}>{{ $league->league_name }} ({{$league->league_name}})</option>
+                    @endforeach
+                </select>
+                @error('league')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label>Home Team</label>
+                <input type="text" class="form-control @error('home_team') is-invalid @enderror" name="home_team" value="{{ old('home_team') }}">
+                @error('home_team')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label>Away Team</label>
+                <input type="text" class="form-control @error('home_team') is-invalid @enderror" name="away_team" value="{{ old('away_team') }}">
+                @error('away_team')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label>Match Date</label>
+                <div class="form-group">
+                    <input type="date" name="match_date" class="form-control" value="{{ old('match_date') }}">
                 </div>
-                <div class="dropdown d-md-flex header-settings">
-                    <a href="#" class="nav-link icon " data-toggle="sidebar-right" data-target=".sidebar-right">
-                        <i class="fe fe-align-right"></i>
-                    </a>
-                </div><!-- SIDE-MENU -->
+                @error('match_date')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
-        </div>
-
+            <div class="form-group col-md-4">
+                <label>Match Time</label>
+                <div class="form-group">
+                    <input type="time" name="match_time" class="form-control" value="{{ old('match_time') }}">
+                </div>
+                @error('match_time')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label>Match Condition</label>
+                <input type="text" name="match_condition" class="form-control @error('match_condition') is-invalid @enderror" value="{{ old('match_condition') }}">
+                @error('match_condition')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label>Odds</label>
+                <input class="form-control @error('odds') is-invalid @enderror" name="odds" type="text" value="{{ old('odds') }}">
+                @error('odds')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary" type="submit">Add Match</button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

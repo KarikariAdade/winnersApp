@@ -17,4 +17,22 @@ class Controller extends BaseController
     {
         return ucfirst(Request::segments()[count(Request::segments()) -1]);
     }
+
+    public function jsonSuccessResponse($msg)
+    {
+        return response()->json([
+            'status' => 'success',
+            'code' => '200',
+            'msg' => $msg
+        ]);
+    }
+
+    public function jsonFailureResponse($msg)
+    {
+        return response()->json([
+            'status' => 'fail',
+            'code' => '401',
+            'msg' => $msg
+        ]);
+    }
 }

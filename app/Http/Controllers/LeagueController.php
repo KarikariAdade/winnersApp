@@ -48,6 +48,7 @@ class LeagueController extends Controller
         return view('leagues.edit', compact('league', 'pageName'));
     }
 
+
     public function update(Request $request, $id)
     {
         $league = $this->getLeague($id);
@@ -65,6 +66,7 @@ class LeagueController extends Controller
         return redirect()->route('league.index');
 
     }
+
 
     public function delete($id)
     {

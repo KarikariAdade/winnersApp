@@ -40,6 +40,7 @@
         <!-- COLOR SKIN CSS -->
         <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/datatable/datatables.css') }}">
+        <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet"/>
         <style>
             table{
                 width: 100% !important;
@@ -124,7 +125,7 @@
                         <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon ti-panel"></i><span class="side-menu__label">Matches</span><i class="angle fa fa-angle-right"></i></a>
                         <ul class="slide-menu">
                             <li><a href="{{ route('match.create') }}" class="slide-item"> Add Match</a></li>
-                            <li><a href="calendar.html" class="slide-item"> View Matches</a></li>
+                            <li><a href="{{ route('match.index') }}" class="slide-item"> View Matches</a></li>
                         </ul>
                     </li>
                     <li><h3>Leagues</h3></li>
@@ -158,7 +159,7 @@
                          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <div class="drop-heading">
                                 <div class="text-center">
-                                    <h5 class="text-dark mb-0">Elizabeth Dyer</h5>
+                                    <h5 class="text-dark mb-0">{{ auth()->user()->name }}</h5>
                                     <small class="text-muted">Administrator</small>
                                 </div>
                             </div>
@@ -424,23 +425,6 @@
 <!-- SPARKLINE JS-->
 <script src="{{ asset('assets/js/jquery.sparkline.min.js') }}"></script>
 
-<!-- CHART-CIRCLE JS-->
-<script src="{{ asset('assets/js/circle-progress.min.js') }}"></script>
-
-<!-- RATING STARJS -->
-<script src="{{ asset('assets/plugins/rating/jquery.rating-stars.js') }}"></script>
-
-<!-- CHARTJS CHART JS-->
-<script src="{{ asset('assets/plugins/chart/Chart.bundle.js') }}"></script>
-<script src="{{ asset('assets/plugins/chart/utils.js') }}"></script>
-
-<!-- PIETY CHART JS-->
-<script src="{{ asset('assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/peitychart/peitychart.init.js') }}"></script>
-
-<!-- ECHART JS-->
-<script src="{{ asset('assets/plugins/echarts/echarts.js') }}"></script>
-
 <!-- SIDE-MENU JS-->
 <script src="{{ asset('assets/plugins/sidemenu/sidemenu.js') }}"></script>
 
@@ -452,15 +436,13 @@
 <script src="{{ asset('assets/plugins/p-scroll/pscroll.js') }}"></script>
 <script src="{{ asset('assets/plugins/p-scroll/pscroll-1.js') }}"></script>
 
-<!-- APEXCHART JS -->
-<script src="{{ asset('assets/js/apexcharts.js') }}"></script>
-
 <!-- INDEX JS -->
 <script src="{{ asset('assets/js/index1.js') }}"></script>
-
 <!-- CUSTOM JS -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+        <script src="{{ asset('assets/plugins/select2/select2.full.min.js') }}"></script>
         <script src="{{ asset('assets/datatable/datatables.js') }}"></script>
+        <script src="{{ asset('assets/js/customjs.js') }}"></script>
         @stack('scripts')
         @include('sweetalert::alert')
 </body>
