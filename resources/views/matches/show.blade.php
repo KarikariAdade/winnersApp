@@ -25,7 +25,18 @@
                     <h3>Conditions: <p class="badge badge-success"> {{ $match->match_condition }}</p></h3><br>
                     <h3>Odds: {{ $match->odds }}</h3>
                 </div>
+            </div><br><br>
+            @if($match->status === 'Lost')
+            <div class="text-center">
+                <h3 class="alert alert-danger">{{ $match->status }}</h3>
             </div>
+            @endif
+            @if($match->status === 'Won')
+                <div class="text-center">
+                    <h3 class="alert alert-success">Congratulations!!! You Won</h3>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
+

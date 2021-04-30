@@ -77,6 +77,10 @@ class MatchController extends Controller
 
         $pageName = 'Match Details';
 
+        if ($match->status == 'Won'){
+            alert()->success('You Won!!!','Congratulations. You Won!');
+        }
+
         return view('matches.show', compact('match', 'pageName'));
     }
 
@@ -93,6 +97,7 @@ class MatchController extends Controller
         return view('matches.edit', compact('match', 'pageName', 'leagues', 'sports_types'));
     }
 
+
     public function update(MatchRequest $request, $id)
     {
         $match = $this->getCurrentMatch($id);
@@ -108,7 +113,20 @@ class MatchController extends Controller
 
     public function changeMatchStatus($id)
     {
-        return $id;
+        $match = $this->getCurrentMatch($id);
+
+        $status = 'Won';
+
+        if ($match->status === 'Won'){
+            $match->update(['status' => 'Lost']);
+            $status = 'Lost';
+        }else{
+            $match->update(['status' => $status]);
+        }
+
+        toast('Status successfully updated to '.$status, 'success');
+
+        return redirect()->route('match.index');
     }
 
 

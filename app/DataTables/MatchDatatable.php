@@ -34,8 +34,17 @@ class MatchDatatable extends DataTable
                 }
                 return Carbon::parse($query->match_day)->toDateString();
             })
+            ->escapeColumns([])
             ->editColumn('match_time', function($query){
                 return Carbon::parse($query->match_time)->toTimeString();
+            })
+            ->editColumn('status', function($query){
+                if ($query->status === 'Won'){
+                    return '<p class="badge badge-success-gradient">'.$query->status.'</p>';
+                }
+                if ($query->status === 'Lost'){
+                    return '<p class="badge badge-danger-gradient">'.$query->status.'</p>';
+                }
             })
             ->editColumn('action', function ($query){
                 return '<div class="btn" style="display: inline-flex;">
@@ -93,6 +102,7 @@ class MatchDatatable extends DataTable
             Column::make('away_team')->title('Away Team'),
             Column::make('match_day')->title('Match Day'),
             Column::make('match_time')->title('Match Time'),
+            Column::make('status')->title('Status'),
             Column::make('created_at'),
         ];
     }

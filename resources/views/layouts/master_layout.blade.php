@@ -41,6 +41,7 @@
         <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('assets/colors/color1.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/datatable/datatables.css') }}">
         <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet" />
         <style>
             table{
                 width: 100% !important;
