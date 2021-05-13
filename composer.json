@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "realrashid/sweet-alert": "^3.2",
+        "tymon/jwt-auth": "^1.0",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
