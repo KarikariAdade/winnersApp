@@ -26,3 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('matches', [ApiController::class, 'index']);
 
 Route::get('match/{id}', [ApiController::class, 'showMatch']);
+
+Route::get('league', [ApiController::class, 'getLeagues']);
+
+Route::get('sport_types', [ApiController::class, 'getSportTypes']);
